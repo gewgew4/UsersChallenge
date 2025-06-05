@@ -1,34 +1,48 @@
+using Api.Extensions;
+using Application;
+using Infrastructure;
+using Serilog;
 
-namespace Api
+namespace Api;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Serilog
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .CreateLogger();
+
+        builder.Host.UseSerilog();
+
+        // Add services
+        builder.Services.AddApiServices();
+        builder.Services.AddApplicationServices();
+        builder.Services.AddInfrastructureServices(builder.Configuration);
+
+        var app = builder.Build();
+
+        // Configure pipeline
+        app.UseApiConfiguration(app.Environment);
+
+        // Map endpoints
+        app.MapApiEndpoints(app.Environment);
+
+        try
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
+            Log.Information("Starting web application");
             app.Run();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Application terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
         }
     }
 }
