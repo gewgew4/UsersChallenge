@@ -4,7 +4,6 @@ using Infrastructure.Repositories;
 
 namespace Infrastructure;
 
-
 public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
 {
     private IPermissionRepository? _permissionRepository;
@@ -21,5 +20,9 @@ public class UnitOfWork(ApplicationDbContext context) : IUnitOfWork
         return await context.SaveChangesAsync();
     }
 
-    public void Dispose() => context.Dispose();
+    public void Dispose()
+    {
+        context.Dispose();
+        GC.SuppressFinalize(this);
+    }
 }

@@ -50,7 +50,22 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             {
                 Id = 1,
                 Description = "First type"
-            })
-            ;
+            },
+            new PermissionType
+            {
+                Id = 2,
+                Description = "Second type"
+            },
+            new PermissionType
+            {
+                Id = 3,
+                Description = "Third type"
+            },
+            new PermissionType
+            {
+                Id = 4,
+                Description = "Fourth type"
+            }
+         );
     }
 }

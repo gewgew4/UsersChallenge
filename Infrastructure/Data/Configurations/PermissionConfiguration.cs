@@ -12,7 +12,7 @@ public class PermissionConfiguration : IEntityTypeConfiguration<Permission>
         builder.HasKey(p => p.Id);
 
         // Properties
-        builder.Property(p=> p.Id)
+        builder.Property(p => p.Id)
             .ValueGeneratedOnAdd();
 
         builder.Property(p => p.EmployeeForename)

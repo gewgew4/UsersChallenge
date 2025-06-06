@@ -60,7 +60,7 @@ public class GenericRepository<TEntity, TId>(ApplicationDbContext context) : IGe
             query = query.Include(includeProperty);
         }
 
-        return await query.FirstOrDefaultAsync(e => e.Id.Equals(id));
+        return await query.FirstOrDefaultAsync(e => e.Id != null && e.Id.Equals(id));
     }
 
     public async Task<IEnumerable<TEntity>?> GetWhere(
