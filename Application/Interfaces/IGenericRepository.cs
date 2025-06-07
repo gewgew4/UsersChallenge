@@ -9,7 +9,7 @@ public interface IGenericRepository<TEntity, TId> where TEntity : BaseEntity<TEn
 
     Task<TEntity?> FirstOrDefault(Expression<Func<TEntity, bool>> predicate, bool tracking = true, params string[] includeProperties);
 
-    IEnumerable<TEntity>? GetAll(bool tracking = true, params string[] includeProperties);
+    IEnumerable<TEntity> GetAll(bool tracking = true, params string[] includeProperties);
 
     Task<TEntity?> GetById(TId id, bool tracking = true, params string[] includeProperties);
 

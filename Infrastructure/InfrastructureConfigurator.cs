@@ -34,7 +34,9 @@ public static class InfrastructureLayerConfigurator
                 throw new InvalidOperationException($"Missing or invalid configuration section: {ElasticSearchSettings.SectionName}");
 
             var connectionSettings = new ConnectionSettings(new Uri(settings.Uri))
-                .DefaultIndex(settings.IndexName);
+                .DefaultIndex(settings.IndexName)
+                .EnableApiVersioningHeader(false)
+                ;
 
             if (!string.IsNullOrEmpty(settings.Username) && !string.IsNullOrEmpty(settings.Password))
             {
