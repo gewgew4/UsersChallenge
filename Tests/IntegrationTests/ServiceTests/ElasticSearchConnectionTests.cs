@@ -90,7 +90,7 @@ public class ElasticSearchConnectionTests : IAsyncLifetime
     [Fact]
     public async Task Connection_WhenElasticsearchUnavailable_ShouldFailGracefully()
     {
-        // Arrange 
+        // Arrange
         await _elasticSearchContainer.StopAsync();
 
         var invalidSettings = Options.Create(new ElasticSearchSettings

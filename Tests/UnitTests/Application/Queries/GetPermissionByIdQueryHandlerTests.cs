@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Tests.Helpers;
 using Xunit;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Tests.UnitTests.Application.Queries;
 

@@ -419,7 +419,6 @@ public class PermissionRepositoryTests : IDisposable
         result.EmployeeSurname.Should().Be(expectedLastName);
     }
 
-
     public void Dispose()
     {
         _context.Dispose();
